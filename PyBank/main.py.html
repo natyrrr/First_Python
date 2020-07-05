@@ -1,0 +1,101 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[106]:
+
+
+total_months = 0
+net_total = 0
+average_change = 0
+greatest_increase = 0
+greatest_decrease = 0
+
+
+# In[107]:
+
+
+from pathlib import Path
+import csv
+
+
+# In[108]:
+
+
+csvpath = Path("../python-homework/PyBank/homework.csv")
+
+
+# In[109]:
+
+
+
+
+
+# In[111]:
+
+
+with open("../PyBank/homework.csv", "r") as csvfile:
+    csvreader = csv.reader(csvfile)
+    header = next(csvreader)
+    
+    print(header)
+    for row in csvreader:
+        total_months = total_months + 1
+        print(row)
+        net_total= net_total + int(row[1])
+        average_change = net_total /total_months
+        if int(row[1]) > int(greatest_increase):
+            greatest_increase = int(row[1])
+            month = row
+        elif int(row[1]) < int(greatest_decrease):
+            greatest_decrease = int(row[1])
+            month2 = row
+        
+
+                                
+
+
+# In[112]:
+
+
+print('Financial Analysis')
+print('-----------------------------')
+print(f'total months: {total_months}'  )
+print('total: $ ' + str(net_total))  
+print('Average change: ' + str(average_change))
+print(f"greatest increase in profits: {month}")
+print(f"greatest decrease in profits: {month2}")
+
+
+# In[119]:
+
+
+happy = f'''
+Financial Analysis
+-----------------------------
+total months: {total_months}
+total: $   {net_total}
+Average change:  {average_change}
+greatest increase in profits: {month}
+greatest decrease in profits: {month2}
+'''
+
+                  
+                                     
+  
+    
+
+
+# In[122]:
+
+
+output_path= Path('financialanalysis.txt')
+with open(output_path, 'w') as newfile:
+    
+    newfile.write(f'{happy}\n')
+
+
+# In[ ]:
+
+
+
+
